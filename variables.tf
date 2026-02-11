@@ -20,7 +20,7 @@ EOT
     gateway_name                       = string
     host_name                          = string
     name                               = string
-    http2_enabled                      = optional(bool, true)
+    http2_enabled                      = optional(bool) # Default: true
     request_client_certificate_enabled = optional(bool)
     tls10_enabled                      = optional(bool)
     tls11_enabled                      = optional(bool)
