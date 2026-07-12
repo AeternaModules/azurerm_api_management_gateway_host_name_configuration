@@ -1,3 +1,7 @@
+output "api_management_gateway_host_name_configurations_id" {
+  description = "Map of id values across all api_management_gateway_host_name_configurations, keyed the same as var.api_management_gateway_host_name_configurations"
+  value       = { for k, v in azurerm_api_management_gateway_host_name_configuration.api_management_gateway_host_name_configurations : k => v.id }
+}
 output "api_management_gateway_host_name_configurations_api_management_id" {
   description = "Map of api_management_id values across all api_management_gateway_host_name_configurations, keyed the same as var.api_management_gateway_host_name_configurations"
   value       = { for k, v in azurerm_api_management_gateway_host_name_configuration.api_management_gateway_host_name_configurations : k => v.api_management_id }
