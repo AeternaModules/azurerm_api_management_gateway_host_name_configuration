@@ -20,19 +20,11 @@ EOT
     gateway_name                       = string
     host_name                          = string
     name                               = string
-    http2_enabled                      = optional(bool) # Default: true
+    http2_enabled                      = optional(bool)
     request_client_certificate_enabled = optional(bool)
     tls10_enabled                      = optional(bool)
     tls11_enabled                      = optional(bool)
   }))
-  validation {
-    condition = alltrue([
-      for k, v in var.api_management_gateway_host_name_configurations : (
-        length(v.host_name) > 0
-      )
-    ])
-    error_message = "must not be empty"
-  }
   # --- Unconfirmed validation candidates, derived from azurerm_api_management_gateway_host_name_configuration's provider source ---
   # Not auto-enabled: either a bespoke provider validator we can't safely translate,
   # or a path that crosses a list-typed block (needs its own for_each wrapping).
@@ -49,5 +41,8 @@ EOT
   #   source:    [from validate.CertificateID] !ok
   # path: certificate_id
   #   source:    [from validate.CertificateID] err != nil
+  # path: host_name
+  #   condition: length(value) > 0
+  #   message:   must not be empty
 }
 
